@@ -6,6 +6,9 @@ const Parser = require("../lib/Parser");
 const BasicEvaluatedExpression = require("../lib/BasicEvaluatedExpression");
 
 describe("Parser", () => {
+	/* eslint-disable no-undef */
+	/* eslint-disable no-unused-vars */
+	/* eslint-disable no-inner-declarations */
 	const testCases = {
 		"call ident": [
 			function() {
@@ -58,8 +61,8 @@ describe("Parser", () => {
 		],
 		"member expression": [
 			function() {
-				test[memberExpr]
-				test[+memberExpr]
+				test[memberExpr];
+				test[+memberExpr];
 			}, {
 				expressions: ["memberExpr", "memberExpr"]
 			}
@@ -191,7 +194,17 @@ describe("Parser", () => {
 				ijksub: ["test"]
 			}
 		],
+		"new Foo(...)": [
+			function() {
+				new xyz("membertest");
+			}, {
+				xyz: ["membertest"]
+			}
+		],
 	};
+	/* eslint-enable no-undef */
+	/* eslint-enable no-unused-vars */
+	/* eslint-enable no-inner-declarations */
 
 	Object.keys(testCases).forEach((name) => {
 		it("should parse " + name, () => {
@@ -235,6 +248,11 @@ describe("Parser", () => {
 			testParser.plugin("expression memberExpr", (expr) => {
 				if(!testParser.state.expressions) testParser.state.expressions = [];
 				testParser.state.expressions.push(expr.name);
+				return true;
+			});
+			testParser.plugin("new xyz", (expr) => {
+				if(!testParser.state.xyz) testParser.state.xyz = [];
+				testParser.state.xyz.push(testParser.parseString(expr.arguments[0]));
 				return true;
 			});
 			const actual = testParser.parse(source);

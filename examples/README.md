@@ -21,7 +21,7 @@
 
 [multiple-entry-points-commons-chunk-css-bundle](multiple-entry-points-commons-chunk-css-bundle)
 
-[names-chunks](names-chunks) example demonstrating merging of chunks with named chunks
+[named-chunks](named-chunks) example demonstrating merging of chunks with named chunks
 
 [two-explicit-vendor-chunks](two-explicit-vendor-chunks)
 
@@ -106,8 +106,8 @@
 ## Scope Hoisting
 [scope-hoisting](scope-hoisting)
 
-## Pure Module
-[pure-module](pure-module)
+## Side Effects
+[side-effects](side-effects)
 
 ## Source Map
 [source-map](source-map)
